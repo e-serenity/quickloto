@@ -20,10 +20,10 @@ const main = async() => {
   console.log("📝 Your transaction signature", tx);
 
   let account = await program.account.baseAccount.fetch(baseAccount.publicKey);
-  console.log('👀 GIF Count', account.totalGifs.toString())
+  console.log('👀 Bets Count', account.totalBets.toString())
 
   // You'll need to now pass a GIF link to the function! You'll also need to pass in the user submitting the GIF!
-  await program.rpc.addGif("https://media.tenor.com/Wz9tsOgDPIMAAAAd/star-atlas.gif", {
+  await program.rpc.addBet("toto", {
     accounts: {
       baseAccount: baseAccount.publicKey,
       user: provider.wallet.publicKey,
@@ -32,10 +32,10 @@ const main = async() => {
   
   // Call the account.
   account = await program.account.baseAccount.fetch(baseAccount.publicKey);
-  console.log('👀 GIF Count', account.totalGifs.toString())
+  console.log('👀 Bets Count', account.totalBets.toString())
 
   // Access gif_list on the account!
-  console.log('👀 GIF List', account.gifList)
+  console.log('👀 Users List', account.usersList)
 }
 
 const runMain = async () => {
