@@ -1,0 +1,15 @@
+[features]
+seeds = false
+skip-lint = false
+[programs.devnet]
+myepicproject = "8TjeZEGGfFcs5z7NKJNz6MuEdH3xrCSybaa5SxQ2ZD9m"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "/home/crazycat/.config/solana/id.json"
+
+[scripts]
+test = "node tests/myepicproject.js"
