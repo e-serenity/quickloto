@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-myepicproject = "8TjeZEGGfFcs5z7NKJNz6MuEdH3xrCSybaa5SxQ2ZD9m"
+myepicproject = "62Em5fizhAbRXfyr8m7AbXGhy5j3JBoq1XGamXeg3MAg"
 
 [registry]
 url = "https://anchor.projectserum.com"

@@ -1,0 +1,95 @@
+{
+    "version": "0.1.0",
+    "name": "myepicproject",
+    "instructions": [
+      {
+        "name": "startStuffOff",
+        "accounts": [
+          {
+            "name": "baseAccount",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "addBet",
+        "accounts": [
+          {
+            "name": "baseAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          }
+        ],
+        "args": [
+          {
+            "name": "userAlias",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "name": "BaseAccount",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "totalBets",
+              "type": "u64"
+            },
+            {
+              "name": "lastWinner",
+              "type": "string"
+            },
+            {
+              "name": "betList",
+              "type": {
+                "vec": {
+                  "defined": "ItemStruct"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "types": [
+      {
+        "name": "ItemStruct",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "userAlias",
+              "type": "string"
+            },
+            {
+              "name": "userAddress",
+              "type": "publicKey"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "address": "62Em5fizhAbRXfyr8m7AbXGhy5j3JBoq1XGamXeg3MAg"
+    }
+  }

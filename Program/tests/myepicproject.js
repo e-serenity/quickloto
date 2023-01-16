@@ -22,7 +22,7 @@ const main = async() => {
   let account = await program.account.baseAccount.fetch(baseAccount.publicKey);
   console.log('👀 Bets Count', account.totalBets.toString())
 
-  // You'll need to now pass a GIF link to the function! You'll also need to pass in the user submitting the GIF!
+  // You'll need to now pass a Wallet Alias to the function! You'll also need to pass in the user submitting the Bet!
   await program.rpc.addBet("toto", {
     accounts: {
       baseAccount: baseAccount.publicKey,
@@ -30,12 +30,20 @@ const main = async() => {
     },
   });
   
+  // You'll need to now pass a Wallet Alias to the function! You'll also need to pass in the user submitting the Bet!
+  await program.rpc.addBet("titi", {
+    accounts: {
+      baseAccount: baseAccount.publicKey,
+      user: provider.wallet.publicKey,
+    },
+  });
+
   // Call the account.
   account = await program.account.baseAccount.fetch(baseAccount.publicKey);
   console.log('👀 Bets Count', account.totalBets.toString())
 
   // Access gif_list on the account!
-  console.log('👀 Users List', account.usersList)
+  console.log('👀 Users List', account.betList)
 }
 
 const runMain = async () => {
