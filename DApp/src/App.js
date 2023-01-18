@@ -4,7 +4,7 @@ import { Program, Provider, web3 } from "@project-serum/anchor";
 import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 
 import "./App.css";
-import idl from "./idl.json";
+// import idl from "./idl.json";
 import kp from "./keypair.json";
 
 // Constants
@@ -20,7 +20,7 @@ const baseAccount = web3.Keypair.fromSecretKey(secret);
 const network = clusterApiUrl("devnet");
 // This is the address of your solana program, if you forgot,
 // just run `solana address -k target/deploy/myepicproject-keypair.json`
-const programID = new PublicKey("62Em5fizhAbRXfyr8m7AbXGhy5j3JBoq1XGamXeg3MAg");
+const programID = new PublicKey("Uit4YPvpH41rggra2Ljt5u7jNWSAGQns61vYQhfYFUY");
 // const programID = new PublicKey(idl.metadata.address);
 
 // Controls how we want to acknowledge when a transaction is "done".
@@ -214,7 +214,7 @@ const App = () => {
                 <div className="header-container">
                     <p className="header">💰 QuickLoto 💰</p>
                     <p className="sub-text">
-                        ✨ Bet 1 $Sol, Random winner every 10 Bets, Winner get 7.77 $Sol, Rest for DAO ✨
+                        ✨ Work In Progress - My first solana program - Choose a winner every 10 transactions ✨
                     </p>
                     {!walletAddress && renderNotConnectedContainer()}
                     {/* We just need to add the inverse here! */}
@@ -222,7 +222,7 @@ const App = () => {
                 </div>
                 <div className="footer-container">
                     <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
-                    <a className="footer-text" href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built on @${TWITTER_HANDLE}`}</a>
+                    <a className="footer-text" href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a>
                 </div>
             </div>
         </div>

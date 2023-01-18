@@ -28,6 +28,8 @@ anchor build
 
 anchor deploy
 
+anchor idl init  -f target/idl/myepicproject.json `solana address -k target/deploy/myepicproject-keypair.json`
+
 #If error :
 ```Error: Deploying program failed: Error processing Instruction 1: custom program error: 0x1
 There was a problem deploying: Output { status: ExitStatus(unix_wait_status(256)), stdout: "", stderr: "" }.
