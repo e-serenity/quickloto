@@ -1,62 +1,67 @@
 use anchor_lang::prelude::*;
 
-declare_id!("8TjeZEGGfFcs5z7NKJNz6MuEdH3xrCSybaa5SxQ2ZD9m");
+declare_id!("Uit4YPvpH41rggra2Ljt5u7jNWSAGQns61vYQhfYFUY");
 
 #[program]
 pub mod myepicproject {
   use super::*;
   pub fn start_stuff_off(ctx: Context<StartStuffOff>) -> Result <()> {
     let base_account = &mut ctx.accounts.base_account;
-    base_account.total_gifs = 0;
+    base_account.total_bets = 0;
+    base_account.last_winner = String::from("First Round");
     Ok(())
   }
 
-  // The function now accepts a gif_link param from the user. We also reference the user from the Context
-  pub fn add_gif(ctx: Context<AddGif>, gif_link: String) -> Result <()> {
+  // The function reference the user from the Context
+  pub fn add_bet(ctx: Context<AddBet>, user_alias: String) -> Result <()> {
     let base_account = &mut ctx.accounts.base_account;
     let user = &mut ctx.accounts.user;
 
 	// Build the struct.
     let item = ItemStruct {
-      gif_link: gif_link.to_string(),
+      user_alias: user_alias.to_string(),
       user_address: *user.to_account_info().key,
     };
 		
-	// Add it to the gif_list vector.
-    base_account.gif_list.push(item);
-    base_account.total_gifs += 1;
+	// Add it to the bet_list vector.
+    base_account.bet_list.push(item);
+    base_account.total_bets += 1;
+    if base_account.total_bets > 9 {
+        println!("Lottery complete !");
+        base_account.total_bets = 0;
+        base_account.last_winner = user_alias;
+        base_account.bet_list.clear();
+    };
     Ok(())
   }
 }
 
 #[derive(Accounts)]
 pub struct StartStuffOff<'info> {
-  #[account(init, payer = user, space = 9000)]
+  #[account(init, payer = user, space = 10000)]
   pub base_account: Account<'info, BaseAccount>,
   #[account(mut)]
   pub user: Signer<'info>,
   pub system_program: Program <'info, System>,
 }
 
-// Add the signer who calls the AddGif method to the struct so that we can save it
 #[derive(Accounts)]
-pub struct AddGif<'info> {
+pub struct AddBet<'info> {
   #[account(mut)]
   pub base_account: Account<'info, BaseAccount>,
   #[account(mut)]
   pub user: Signer<'info>,
 }
 
-// Create a custom struct for us to work with.
 #[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct ItemStruct {
-    pub gif_link: String,
+    pub user_alias: String,
     pub user_address: Pubkey,
 }
 
 #[account]
 pub struct BaseAccount {
-    pub total_gifs: u64,
-	// Attach a Vector of type ItemStruct to the account.
-    pub gif_list: Vec<ItemStruct>,
+    pub total_bets: u64,
+    pub last_winner: String,
+    pub bet_list: Vec<ItemStruct>,
 }
